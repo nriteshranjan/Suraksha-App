@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity
         }
         else if(name.equals("")||pass.equals(""))
         {
-            Toast.makeText(this, "Please input data for the fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please input data for  the fields", Toast.LENGTH_SHORT).show();
         }
         else Toast.makeText(this, "Wrong details entered!", Toast.LENGTH_SHORT).show();
     }

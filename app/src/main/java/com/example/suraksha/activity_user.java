@@ -5,9 +5,13 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -36,8 +40,8 @@ public class activity_user extends AppCompatActivity
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        NavigationView navigationView=findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener()
+        final NavigationView nav_view=findViewById(R.id.nav_view);
+        nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener()
         {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
@@ -47,21 +51,28 @@ public class activity_user extends AppCompatActivity
                 if(id==R.id.trackDaughter)
                 {
                     ///IMPLEMENT ON CLICK LISTENER
+                    Toast.makeText(activity_user.this, "Track Daughter", Toast.LENGTH_SHORT).show();
                 }
 
                 else if(id==R.id.myProfile)
                 {
                     ///IMPLEMENT ON CLICK LISTENER
+                    Toast.makeText(activity_user.this, "My Profile", Toast.LENGTH_SHORT).show();
                 }
 
                 else if(id==R.id.emergency)
                 {
                     ///IMPLEMENT ON CLICK LISTENER
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:100"));
+                    startActivity(callIntent);
+                    Toast.makeText(activity_user.this, "Emergency", Toast.LENGTH_SHORT).show();
                 }
 
                 else if(id==R.id.selfDefense)
                 {
                     ///IMPLEMENT ON CLICK LISTENER
+                    Toast.makeText(activity_user.this, "Self Defence", Toast.LENGTH_SHORT).show();
                 }
 
                 return true;
@@ -69,6 +80,7 @@ public class activity_user extends AppCompatActivity
         });
 
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
