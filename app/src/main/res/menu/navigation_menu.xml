@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+       android:id="@+id/trackDaughter"
+        android:title="Track my Daughter"
+        android:icon="@drawable/ic_location_searching_black_24dp"
+        >
+    </item>
+
+    <item
+        android:id="@+id/myProfile"
+        android:title="My Profile"
+        android:icon="@drawable/ic_person_black_24dp"
+        >
+    </item>
+
+    <item
+        android:id="@+id/emergency"
+        android:title="Emergency"
+        android:icon="@drawable/ic_warning_black_24dp"
+        >
+    </item>
+
+    <item
+        android:id="@+id/selfDefense"
+        android:title=" Self Defence Tutorials"
+        android:icon="@drawable/ic_ondemand_video_black_24dp"
+        >
+    </item>
+
+</menu>
