@@ -29,7 +29,7 @@ public class activity_user extends AppCompatActivity
         Bundle bundle=getIntent().getExtras();
         String name=bundle.getString("name");
         System.out.println("Name : "+name);
-        usern.setText(name);
+        usern.setText("WELCOME");
 
         drawerLayout=findViewById(R.id.drawerLayout);
         actionBarDrawerToggle=new ActionBarDrawerToggle(this,drawerLayout,R.string.Open,R.string.Close);
@@ -52,6 +52,8 @@ public class activity_user extends AppCompatActivity
                 {
                     ///IMPLEMENT ON CLICK LISTENER
                     Toast.makeText(activity_user.this, "Track Daughter", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(activity_user.this,MapsActivity.class);
+                    startActivity(intent);
                 }
 
                 else if(id==R.id.myProfile)

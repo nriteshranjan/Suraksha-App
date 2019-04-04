@@ -2,5 +2,6 @@
     <string name="app_name">Suraksha</string>
     <string name="Open">Suraksha</string>
     <string name="Close">Suraksha</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
