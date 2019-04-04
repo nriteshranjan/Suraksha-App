@@ -3,5 +3,6 @@
     <string name="Open">Suraksha</string>
     <string name="Close">Suraksha</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps_direction">Map</string>
 
 </resources>

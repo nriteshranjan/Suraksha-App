@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,21 @@ public class activity_user extends AppCompatActivity
         String name=bundle.getString("name");
         System.out.println("Name : "+name);
         usern.setText("WELCOME");
+
+
+        Button navigate =findViewById(R.id.navigateButton);
+        navigate.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent=new Intent(activity_user.this,MapsDirection.class);
+                startActivity(intent);
+            }
+        });
+
+
+
 
         drawerLayout=findViewById(R.id.drawerLayout);
         actionBarDrawerToggle=new ActionBarDrawerToggle(this,drawerLayout,R.string.Open,R.string.Close);
