@@ -68,7 +68,7 @@ public class MapsDirection extends FragmentActivity implements OnMapReadyCallbac
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-    @RequiresApi(api = Build.VERSION_CODES.M)
+   //@RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -139,12 +139,13 @@ public class MapsDirection extends FragmentActivity implements OnMapReadyCallbac
         //OUTPUT FORMAT
         String output="json";
         //CREATE URL TO REQUEST
-        String url="https://maps.googleapis.com/maps/api/directions/"+output+"?"+param+"&key=AIzaSyAJXRSKpx2EQm4BA1t_QF1gwB4znrv6PVk";
+        String url="https://maps.googleapis.com/maps/api/directions/"+output+"?"+param+"&key=AIzaSyAPtT84xIbKnC1Kg-CoJy_FVieqXJv7KnI";
         return url;
     }
 
 
-    private String requestDirection(String reqUrl) throws IOException {
+    private String requestDirection(String reqUrl) throws IOException
+    {
         String responseString="";
         InputStream inputStream=null;
         HttpURLConnection httpURLConnection=null;
@@ -279,6 +280,7 @@ public class MapsDirection extends FragmentActivity implements OnMapReadyCallbac
                 mMap.addPolyline(polylineOptions);
             }
             else {
+                System.out.println("Directions not found");
                 Toast.makeText(getApplicationContext(),"Directions not found", Toast.LENGTH_SHORT).show();
 
             }
