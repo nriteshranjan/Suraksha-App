@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,17 +12,13 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.speech.RecognizerIntent;
 import android.telephony.SmsManager;
-import android.view.Menu;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.material.navigation.NavigationView;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -34,7 +29,6 @@ public class activity_user extends AppCompatActivity
     private TextView usern;
     private TextView resultTEXT;
     private Button analyse;
-
     private Thread callThread;
     private Thread messageThread;
 
@@ -45,9 +39,9 @@ public class activity_user extends AppCompatActivity
         setContentView(R.layout.activity_user);
         usern=findViewById(R.id.usern);
 //        Bundle bundle=getIntent().getExtras();
-//        String name=bundle.getString("name");
+       String name=getIntent().getExtras().getString("name");
 //        System.out.println("Name : "+name);
-        usern.setText("WELCOME");
+        usern.setText("WELCOME "+name);
 
         resultTEXT=findViewById(R.id.recordText);
         analyse=findViewById(R.id.analyseButton);
@@ -62,11 +56,12 @@ public class activity_user extends AppCompatActivity
                 final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                 String value=(mSharedPreference.getString("phoneKey", "100"));
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:"+value));
+                callIntent.setData(Uri.parse("tel:100"));
                 startActivity(callIntent);
-                Toast.makeText(activity_user.this, "Emergency", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(activity_user.this, "Emergency", Toast.LENGTH_SHORT).show();
             }
         });
+
 
         messageThread = new Thread(new Runnable()
         {
@@ -81,6 +76,14 @@ public class activity_user extends AppCompatActivity
 
                 /////////////GETTING LOCATION////////////
 
+                /////////////GETTING PHONE VALUES////////
+
+                final SharedPreferences mPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                String va=(mPreference.getString("phoneKey", "100"));
+
+                /////////////GETTING PHONE VALUES////////
+
+
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
@@ -88,9 +91,9 @@ public class activity_user extends AppCompatActivity
 
                 //Get the SmsManager instance and call the sendTextMessage method to send message
                 SmsManager sms = SmsManager.getDefault();
-                sms.sendTextMessage("8130402091", null, "Hey I am in danger, find me at this location "+ value, pi, null);
+                sms.sendTextMessage(va, null, "Hey I am in danger, find me at this location "+ value, pi, null);
 
-                Toast.makeText(getApplicationContext(), "Message Sent successfully!", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Message Sent successfully!", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -108,10 +111,9 @@ public class activity_user extends AppCompatActivity
 
 
         ///////////////////////SETTING VISIBILITY//////////////////////
-       analyse.setVisibility(View.GONE);
-       resultTEXT.setVisibility(View.GONE);
+        analyse.setVisibility(View.GONE);
+        resultTEXT.setVisibility(View.GONE);
         ///////////////////////SETTING VISIBILITY//////////////////////
-
 
 
         analyse.setOnClickListener(new View.OnClickListener()
@@ -119,19 +121,16 @@ public class activity_user extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-               if(resultTEXT.getText().toString().equals("help"))
+                if(resultTEXT.getText().toString().equals("help"))
                 {
 
                     messageThread.start();
                     callThread.start();
                 }
-
                 else {}//resultTEXT.setVisibility(View.VISIBLE);
-
             }
-
-
         });
+
 
         drawerLayout=findViewById(R.id.drawerLayout);
         actionBarDrawerToggle=new ActionBarDrawerToggle(this,drawerLayout,R.string.Open,R.string.Close);
@@ -186,8 +185,24 @@ public class activity_user extends AppCompatActivity
                 return true;
             }
         });
-
     }
+
+
+    /////////////////////EXECUTING FUNCTIONS ON PRESSING HARD => KEYS /////////////////////
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN || keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+            messageThread.start();
+            callThread.start();
+            // Do your thing
+            return true;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+    }
+    /////////////////////EXECUTING FUNCTIONS ON PRESSING HARD => KEYS /////////////////////
+
+
     public void onClickRecord(View view)
     {
         if(view.getId()==R.id.recordButton)
@@ -195,6 +210,7 @@ public class activity_user extends AppCompatActivity
             promptSpeechInput();
         }
     }
+
 
     public void promptSpeechInput()
     {
@@ -210,6 +226,7 @@ public class activity_user extends AppCompatActivity
             Toast.makeText(activity_user.this,"Sorry! Your device does not support speech language", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     public void onActivityResult(int request_code,int result_code,Intent intent)
     {
@@ -238,4 +255,6 @@ public class activity_user extends AppCompatActivity
     {
         return actionBarDrawerToggle.onOptionsItemSelected(item)||super.onOptionsItemSelected(item);
     }
+
+
 }

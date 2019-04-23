@@ -14,6 +14,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity
 {
     EditText username,password;
+    //String s;
     Button login;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,9 +33,9 @@ public class MainActivity extends AppCompatActivity
         if(name.equals("admin")&&pass.equals("admin"))
         {
             Intent intent=new Intent(MainActivity.this,activity_user.class);
-            Bundle bundle=new Bundle();
-            bundle.putString("name", String.valueOf(username));
-            intent.putExtras(bundle);
+            System.out.println("help "+name);
+
+            intent.putExtra("name", name);
 
             startActivity(intent);
         }

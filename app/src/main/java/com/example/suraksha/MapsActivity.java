@@ -72,7 +72,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Geocoder geocoder=new Geocoder(getApplicationContext());
                     try {
                         List<Address> addressList=geocoder.getFromLocation(latitude,longitude,1);
-                         str=addressList.get(0).getLocality()+" ,";
+                        str=addressList.get(0).getLocality()+",";
+                        str+=addressList.get(0).getPostalCode()+", Latitude:";
+                        str+=addressList.get(0).getLatitude()+", Longitude:" ;
+                        str+=addressList.get(0).getLongitude()+", ";
                         str+=addressList.get(0).getCountryName();
                         setDefaults("Location",str,MapsActivity.this);
                         mMap.addMarker(new MarkerOptions().position(latLng).title(str));
@@ -118,7 +121,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Geocoder geocoder=new Geocoder(getApplicationContext());
                     try {
                         List<Address> addressList=geocoder.getFromLocation(latitude,longitude,1);
-                         str=addressList.get(0).getLocality()+" ,";
+                         str=addressList.get(0).getLocality()+",";
+                        str+=addressList.get(0).getPostalCode()+", ";
+                        str+=addressList.get(0).getLatitude()+", " ;
+                        str+=addressList.get(0).getLongitude()+", ";
                         str+=addressList.get(0).getCountryName();
                         setDefaults("Location",str,MapsActivity.this);
                         mMap.addMarker(new MarkerOptions().position(latLng).title(str));
